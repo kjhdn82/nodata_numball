@@ -16,11 +16,14 @@
 
     <p id="result" class="mt-4 fs-5 fw-bold"></p>
     <p id="attempts" class="text-muted">남은 기회: <span id="left">5</span>번</p>
+    <p id="history" class="mt-3 text-muted">입력한 숫자들: <span id="guesses">없음</span></p>
   </div>
 
   <script>
     let secret, attemptsLeft, gameOver;
-
+    let guessHistory = [];
+    document.getElementById("guesses").textContent = "없음";
+    
     const guessInput = document.getElementById('guess');
     const checkBtn = document.getElementById('check');
     const resetBtn = document.getElementById('reset');
@@ -57,7 +60,12 @@
         resultEl.style.color = "gray";
         return;
       }
-
+      
+      guessInput.value = "";
+      
+      guessHistory.push(guess);
+      document.getElementById("guesses").textContent = guessHistory.join(", ");
+      
       attemptsLeft--;
       leftEl.textContent = attemptsLeft;
 
